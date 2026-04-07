@@ -1,0 +1,1430 @@
+{
+  "courses": [
+    {
+      "course_id": "CSE001",
+      "course_name": "Fundamentals Operating Systems",
+      "branch": "CSE",
+      "year": 1,
+      "semester": 1,
+      "num_students": 127,
+      "faculty_id": "F017",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 0
+    },
+    {
+      "course_id": "CSE002",
+      "course_name": "Fundamentals AI III",
+      "branch": "CSE",
+      "year": 1,
+      "semester": 1,
+      "num_students": 124,
+      "faculty_id": "F015",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 2
+    },
+    {
+      "course_id": "CSE003",
+      "course_name": "Fundamentals Programming I",
+      "branch": "CSE",
+      "year": 1,
+      "semester": 1,
+      "num_students": 118,
+      "faculty_id": "F013",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 2
+    },
+    {
+      "course_id": "CSE004",
+      "course_name": "Fundamentals AI II",
+      "branch": "CSE",
+      "year": 1,
+      "semester": 1,
+      "num_students": 102,
+      "faculty_id": "F006",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 2
+    },
+    {
+      "course_id": "CSE005",
+      "course_name": "Basic Programming",
+      "branch": "CSE",
+      "year": 1,
+      "semester": 1,
+      "num_students": 123,
+      "faculty_id": "F008",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 1
+    },
+    {
+      "course_id": "CSE006",
+      "course_name": "Basic AI",
+      "branch": "CSE",
+      "year": 1,
+      "semester": 1,
+      "num_students": 130,
+      "faculty_id": "F019",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 1
+    },
+    {
+      "course_id": "CSE007",
+      "course_name": "Introduction to Software Engineering",
+      "branch": "CSE",
+      "year": 1,
+      "semester": 1,
+      "num_students": 105,
+      "faculty_id": "F010",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 1
+    },
+    {
+      "course_id": "CSE008",
+      "course_name": "Basic Algorithms III",
+      "branch": "CSE",
+      "year": 1,
+      "semester": 1,
+      "num_students": 124,
+      "faculty_id": "F009",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 1
+    },
+    {
+      "course_id": "CSE009",
+      "course_name": "Applied Compiler Design",
+      "branch": "CSE",
+      "year": 2,
+      "semester": 3,
+      "num_students": 94,
+      "faculty_id": "F007",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 2
+    },
+    {
+      "course_id": "CSE010",
+      "course_name": "Intermediate Networks",
+      "branch": "CSE",
+      "year": 2,
+      "semester": 3,
+      "num_students": 119,
+      "faculty_id": "F015",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 0
+    },
+    {
+      "course_id": "CSE011",
+      "course_name": "Intermediate Algorithms",
+      "branch": "CSE",
+      "year": 2,
+      "semester": 3,
+      "num_students": 90,
+      "faculty_id": "F017",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 2
+    },
+    {
+      "course_id": "CSE012",
+      "course_name": "Applied Theory of Computation",
+      "branch": "CSE",
+      "year": 2,
+      "semester": 3,
+      "num_students": 94,
+      "faculty_id": "F012",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 0
+    },
+    {
+      "course_id": "CSE013",
+      "course_name": "Intermediate Algorithms II",
+      "branch": "CSE",
+      "year": 2,
+      "semester": 3,
+      "num_students": 94,
+      "faculty_id": "F013",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 1
+    },
+    {
+      "course_id": "CSE014",
+      "course_name": "Intermediate Software Engineering",
+      "branch": "CSE",
+      "year": 2,
+      "semester": 3,
+      "num_students": 107,
+      "faculty_id": "F013",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 1
+    },
+    {
+      "course_id": "CSE015",
+      "course_name": "Applied Data Structures III",
+      "branch": "CSE",
+      "year": 2,
+      "semester": 3,
+      "num_students": 94,
+      "faculty_id": "F014",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 1
+    },
+    {
+      "course_id": "CSE016",
+      "course_name": "Applied Machine Learning II",
+      "branch": "CSE",
+      "year": 2,
+      "semester": 3,
+      "num_students": 116,
+      "faculty_id": "F020",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 1
+    },
+    {
+      "course_id": "CSE017",
+      "course_name": "Modern Programming",
+      "branch": "CSE",
+      "year": 3,
+      "semester": 5,
+      "num_students": 91,
+      "faculty_id": "F002",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 0
+    },
+    {
+      "course_id": "CSE018",
+      "course_name": "Modern Programming",
+      "branch": "CSE",
+      "year": 3,
+      "semester": 5,
+      "num_students": 83,
+      "faculty_id": "F001",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 2
+    },
+    {
+      "course_id": "CSE019",
+      "course_name": "Advanced Algorithms",
+      "branch": "CSE",
+      "year": 3,
+      "semester": 5,
+      "num_students": 103,
+      "faculty_id": "F017",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 0
+    },
+    {
+      "course_id": "CSE020",
+      "course_name": "Advanced Computer Architecture",
+      "branch": "CSE",
+      "year": 3,
+      "semester": 5,
+      "num_students": 89,
+      "faculty_id": "F017",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 0
+    },
+    {
+      "course_id": "CSE021",
+      "course_name": "Advanced Computer Architecture",
+      "branch": "CSE",
+      "year": 3,
+      "semester": 5,
+      "num_students": 102,
+      "faculty_id": "F019",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 2
+    },
+    {
+      "course_id": "CSE022",
+      "course_name": "Advanced Data Structures",
+      "branch": "CSE",
+      "year": 3,
+      "semester": 5,
+      "num_students": 89,
+      "faculty_id": "F012",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 1
+    },
+    {
+      "course_id": "CSE023",
+      "course_name": "Advanced AI I",
+      "branch": "CSE",
+      "year": 3,
+      "semester": 5,
+      "num_students": 104,
+      "faculty_id": "F009",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 1
+    },
+    {
+      "course_id": "CSE024",
+      "course_name": "Topics in Compiler Design II",
+      "branch": "CSE",
+      "year": 3,
+      "semester": 5,
+      "num_students": 87,
+      "faculty_id": "F015",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 1
+    },
+    {
+      "course_id": "CSE025",
+      "course_name": "Research in Networks",
+      "branch": "CSE",
+      "year": 4,
+      "semester": 7,
+      "num_students": 85,
+      "faculty_id": "F009",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 1
+    },
+    {
+      "course_id": "CSE026",
+      "course_name": "Research in Machine Learning I",
+      "branch": "CSE",
+      "year": 4,
+      "semester": 7,
+      "num_students": 73,
+      "faculty_id": "F012",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 2
+    },
+    {
+      "course_id": "CSE027",
+      "course_name": "Specialized Computer Architecture",
+      "branch": "CSE",
+      "year": 4,
+      "semester": 7,
+      "num_students": 89,
+      "faculty_id": "F010",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 0
+    },
+    {
+      "course_id": "CSE028",
+      "course_name": "Specialized Theory of Computation",
+      "branch": "CSE",
+      "year": 4,
+      "semester": 7,
+      "num_students": 88,
+      "faculty_id": "F018",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 0
+    },
+    {
+      "course_id": "CSE029",
+      "course_name": "Advanced Topics Compiler Design II",
+      "branch": "CSE",
+      "year": 4,
+      "semester": 7,
+      "num_students": 70,
+      "faculty_id": "F018",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 0
+    },
+    {
+      "course_id": "CSE030",
+      "course_name": "Specialized Networks",
+      "branch": "CSE",
+      "year": 4,
+      "semester": 7,
+      "num_students": 73,
+      "faculty_id": "F001",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 1
+    },
+    {
+      "course_id": "CSE031",
+      "course_name": "Capstone Data Structures",
+      "branch": "CSE",
+      "year": 4,
+      "semester": 7,
+      "num_students": 72,
+      "faculty_id": "F006",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 1
+    },
+    {
+      "course_id": "CSE032",
+      "course_name": "Capstone Computer Architecture",
+      "branch": "CSE",
+      "year": 4,
+      "semester": 7,
+      "num_students": 83,
+      "faculty_id": "F014",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 2
+    },
+    {
+      "course_id": "ECE033",
+      "course_name": "Basic VLSI II",
+      "branch": "ECE",
+      "year": 1,
+      "semester": 1,
+      "num_students": 109,
+      "faculty_id": "F017",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 0
+    },
+    {
+      "course_id": "ECE034",
+      "course_name": "Basic Embedded Systems",
+      "branch": "ECE",
+      "year": 1,
+      "semester": 1,
+      "num_students": 116,
+      "faculty_id": "F020",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 1
+    },
+    {
+      "course_id": "ECE035",
+      "course_name": "Fundamentals Digital Electronics II",
+      "branch": "ECE",
+      "year": 1,
+      "semester": 1,
+      "num_students": 106,
+      "faculty_id": "F006",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 2
+    },
+    {
+      "course_id": "ECE036",
+      "course_name": "Foundation Signals",
+      "branch": "ECE",
+      "year": 1,
+      "semester": 1,
+      "num_students": 116,
+      "faculty_id": "F020",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 2
+    },
+    {
+      "course_id": "ECE037",
+      "course_name": "Introduction to Control Systems",
+      "branch": "ECE",
+      "year": 1,
+      "semester": 1,
+      "num_students": 126,
+      "faculty_id": "F012",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 2
+    },
+    {
+      "course_id": "ECE038",
+      "course_name": "Introduction to Microprocessors",
+      "branch": "ECE",
+      "year": 1,
+      "semester": 1,
+      "num_students": 110,
+      "faculty_id": "F004",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 0
+    },
+    {
+      "course_id": "ECE039",
+      "course_name": "Foundation Embedded Systems",
+      "branch": "ECE",
+      "year": 1,
+      "semester": 1,
+      "num_students": 114,
+      "faculty_id": "F013",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 0
+    },
+    {
+      "course_id": "ECE040",
+      "course_name": "Introduction to Embedded Systems",
+      "branch": "ECE",
+      "year": 1,
+      "semester": 1,
+      "num_students": 121,
+      "faculty_id": "F018",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 0
+    },
+    {
+      "course_id": "ECE041",
+      "course_name": "Intermediate Power Systems",
+      "branch": "ECE",
+      "year": 2,
+      "semester": 3,
+      "num_students": 109,
+      "faculty_id": "F009",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 1
+    },
+    {
+      "course_id": "ECE042",
+      "course_name": "Applied Control Systems",
+      "branch": "ECE",
+      "year": 2,
+      "semester": 3,
+      "num_students": 117,
+      "faculty_id": "F020",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 1
+    },
+    {
+      "course_id": "ECE043",
+      "course_name": "Intermediate Embedded Systems",
+      "branch": "ECE",
+      "year": 2,
+      "semester": 3,
+      "num_students": 103,
+      "faculty_id": "F016",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 2
+    },
+    {
+      "course_id": "ECE044",
+      "course_name": "Intermediate Microprocessors",
+      "branch": "ECE",
+      "year": 2,
+      "semester": 3,
+      "num_students": 99,
+      "faculty_id": "F016",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 2
+    },
+    {
+      "course_id": "ECE045",
+      "course_name": "Advanced Introduction Microprocessors II",
+      "branch": "ECE",
+      "year": 2,
+      "semester": 3,
+      "num_students": 105,
+      "faculty_id": "F004",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 2
+    },
+    {
+      "course_id": "ECE046",
+      "course_name": "Intermediate Wireless Networks",
+      "branch": "ECE",
+      "year": 2,
+      "semester": 3,
+      "num_students": 105,
+      "faculty_id": "F008",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 1
+    },
+    {
+      "course_id": "ECE047",
+      "course_name": "Advanced Introduction Microprocessors",
+      "branch": "ECE",
+      "year": 2,
+      "semester": 3,
+      "num_students": 98,
+      "faculty_id": "F009",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 1
+    },
+    {
+      "course_id": "ECE048",
+      "course_name": "Intermediate Signals",
+      "branch": "ECE",
+      "year": 2,
+      "semester": 3,
+      "num_students": 96,
+      "faculty_id": "F017",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 0
+    },
+    {
+      "course_id": "ECE049",
+      "course_name": "Topics in Signals",
+      "branch": "ECE",
+      "year": 3,
+      "semester": 5,
+      "num_students": 88,
+      "faculty_id": "F017",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 0
+    },
+    {
+      "course_id": "ECE050",
+      "course_name": "Topics in Electromagnetics",
+      "branch": "ECE",
+      "year": 3,
+      "semester": 5,
+      "num_students": 89,
+      "faculty_id": "F006",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 1
+    },
+    {
+      "course_id": "ECE051",
+      "course_name": "Modern Signals",
+      "branch": "ECE",
+      "year": 3,
+      "semester": 5,
+      "num_students": 81,
+      "faculty_id": "F018",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 0
+    },
+    {
+      "course_id": "ECE052",
+      "course_name": "Modern Control Systems",
+      "branch": "ECE",
+      "year": 3,
+      "semester": 5,
+      "num_students": 89,
+      "faculty_id": "F011",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 0
+    },
+    {
+      "course_id": "ECE053",
+      "course_name": "Topics in Microprocessors",
+      "branch": "ECE",
+      "year": 3,
+      "semester": 5,
+      "num_students": 105,
+      "faculty_id": "F019",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 2
+    },
+    {
+      "course_id": "ECE054",
+      "course_name": "Modern Circuits",
+      "branch": "ECE",
+      "year": 3,
+      "semester": 5,
+      "num_students": 105,
+      "faculty_id": "F001",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 0
+    },
+    {
+      "course_id": "ECE055",
+      "course_name": "Modern VLSI I",
+      "branch": "ECE",
+      "year": 3,
+      "semester": 5,
+      "num_students": 103,
+      "faculty_id": "F019",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 1
+    },
+    {
+      "course_id": "ECE056",
+      "course_name": "Modern Circuits",
+      "branch": "ECE",
+      "year": 3,
+      "semester": 5,
+      "num_students": 94,
+      "faculty_id": "F020",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 0
+    },
+    {
+      "course_id": "ECE057",
+      "course_name": "Capstone Microprocessors I",
+      "branch": "ECE",
+      "year": 4,
+      "semester": 7,
+      "num_students": 93,
+      "faculty_id": "F012",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 1
+    },
+    {
+      "course_id": "ECE058",
+      "course_name": "Specialized Circuits",
+      "branch": "ECE",
+      "year": 4,
+      "semester": 7,
+      "num_students": 83,
+      "faculty_id": "F005",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 0
+    },
+    {
+      "course_id": "ECE059",
+      "course_name": "Capstone Digital Electronics",
+      "branch": "ECE",
+      "year": 4,
+      "semester": 7,
+      "num_students": 70,
+      "faculty_id": "F001",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 2
+    },
+    {
+      "course_id": "ECE060",
+      "course_name": "Advanced Topics Microprocessors II",
+      "branch": "ECE",
+      "year": 4,
+      "semester": 7,
+      "num_students": 74,
+      "faculty_id": "F011",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 2
+    },
+    {
+      "course_id": "ECE061",
+      "course_name": "Advanced Topics Power Systems III",
+      "branch": "ECE",
+      "year": 4,
+      "semester": 7,
+      "num_students": 76,
+      "faculty_id": "F001",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 2
+    },
+    {
+      "course_id": "ECE062",
+      "course_name": "Advanced Topics VLSI III",
+      "branch": "ECE",
+      "year": 4,
+      "semester": 7,
+      "num_students": 72,
+      "faculty_id": "F009",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 0
+    },
+    {
+      "course_id": "ECE063",
+      "course_name": "Capstone Electromagnetics II",
+      "branch": "ECE",
+      "year": 4,
+      "semester": 7,
+      "num_students": 85,
+      "faculty_id": "F012",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 1
+    },
+    {
+      "course_id": "ECE064",
+      "course_name": "Specialized Embedded Systems I",
+      "branch": "ECE",
+      "year": 4,
+      "semester": 7,
+      "num_students": 94,
+      "faculty_id": "F003",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 2
+    },
+    {
+      "course_id": "DSAI065",
+      "course_name": "Introduction to Reinforcement Learning",
+      "branch": "DSAI",
+      "year": 1,
+      "semester": 1,
+      "num_students": 102,
+      "faculty_id": "F017",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 1
+    },
+    {
+      "course_id": "DSAI066",
+      "course_name": "Basic Machine Learning II",
+      "branch": "DSAI",
+      "year": 1,
+      "semester": 1,
+      "num_students": 118,
+      "faculty_id": "F011",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 2
+    },
+    {
+      "course_id": "DSAI067",
+      "course_name": "Fundamentals Machine Learning",
+      "branch": "DSAI",
+      "year": 1,
+      "semester": 1,
+      "num_students": 111,
+      "faculty_id": "F013",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 1
+    },
+    {
+      "course_id": "DSAI068",
+      "course_name": "Introduction to Statistics III",
+      "branch": "DSAI",
+      "year": 1,
+      "semester": 1,
+      "num_students": 127,
+      "faculty_id": "F009",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 1
+    },
+    {
+      "course_id": "DSAI069",
+      "course_name": "Foundation Statistics",
+      "branch": "DSAI",
+      "year": 1,
+      "semester": 1,
+      "num_students": 113,
+      "faculty_id": "F019",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 0
+    },
+    {
+      "course_id": "DSAI070",
+      "course_name": "Basic Big Data I",
+      "branch": "DSAI",
+      "year": 1,
+      "semester": 1,
+      "num_students": 129,
+      "faculty_id": "F008",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 0
+    },
+    {
+      "course_id": "DSAI071",
+      "course_name": "Basic Data Mining",
+      "branch": "DSAI",
+      "year": 1,
+      "semester": 1,
+      "num_students": 105,
+      "faculty_id": "F011",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 0
+    },
+    {
+      "course_id": "DSAI072",
+      "course_name": "Introduction to Machine Learning",
+      "branch": "DSAI",
+      "year": 1,
+      "semester": 1,
+      "num_students": 127,
+      "faculty_id": "F016",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 0
+    },
+    {
+      "course_id": "DSAI073",
+      "course_name": "Intermediate Data Mining",
+      "branch": "DSAI",
+      "year": 2,
+      "semester": 3,
+      "num_students": 110,
+      "faculty_id": "F017",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 2
+    },
+    {
+      "course_id": "DSAI074",
+      "course_name": "Advanced Introduction AI Ethics",
+      "branch": "DSAI",
+      "year": 2,
+      "semester": 3,
+      "num_students": 100,
+      "faculty_id": "F003",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 0
+    },
+    {
+      "course_id": "DSAI075",
+      "course_name": "Intermediate AI Ethics",
+      "branch": "DSAI",
+      "year": 2,
+      "semester": 3,
+      "num_students": 110,
+      "faculty_id": "F020",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 1
+    },
+    {
+      "course_id": "DSAI076",
+      "course_name": "Applied Computer Vision I",
+      "branch": "DSAI",
+      "year": 2,
+      "semester": 3,
+      "num_students": 119,
+      "faculty_id": "F012",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 2
+    },
+    {
+      "course_id": "DSAI077",
+      "course_name": "Advanced Introduction Natural Language Processing",
+      "branch": "DSAI",
+      "year": 2,
+      "semester": 3,
+      "num_students": 105,
+      "faculty_id": "F007",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 2
+    },
+    {
+      "course_id": "DSAI078",
+      "course_name": "Applied AI Ethics",
+      "branch": "DSAI",
+      "year": 2,
+      "semester": 3,
+      "num_students": 115,
+      "faculty_id": "F017",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 0
+    },
+    {
+      "course_id": "DSAI079",
+      "course_name": "Applied AI Ethics",
+      "branch": "DSAI",
+      "year": 2,
+      "semester": 3,
+      "num_students": 97,
+      "faculty_id": "F015",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 0
+    },
+    {
+      "course_id": "DSAI080",
+      "course_name": "Advanced Introduction Reinforcement Learning I",
+      "branch": "DSAI",
+      "year": 2,
+      "semester": 3,
+      "num_students": 119,
+      "faculty_id": "F003",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 1
+    },
+    {
+      "course_id": "DSAI081",
+      "course_name": "Modern Analytics I",
+      "branch": "DSAI",
+      "year": 3,
+      "semester": 5,
+      "num_students": 99,
+      "faculty_id": "F001",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 0
+    },
+    {
+      "course_id": "DSAI082",
+      "course_name": "Advanced Reinforcement Learning",
+      "branch": "DSAI",
+      "year": 3,
+      "semester": 5,
+      "num_students": 107,
+      "faculty_id": "F019",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 1
+    },
+    {
+      "course_id": "DSAI083",
+      "course_name": "Advanced Big Data",
+      "branch": "DSAI",
+      "year": 3,
+      "semester": 5,
+      "num_students": 101,
+      "faculty_id": "F019",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 0
+    },
+    {
+      "course_id": "DSAI084",
+      "course_name": "Topics in Statistics II",
+      "branch": "DSAI",
+      "year": 3,
+      "semester": 5,
+      "num_students": 101,
+      "faculty_id": "F014",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 0
+    },
+    {
+      "course_id": "DSAI085",
+      "course_name": "Advanced Computer Vision",
+      "branch": "DSAI",
+      "year": 3,
+      "semester": 5,
+      "num_students": 92,
+      "faculty_id": "F004",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 0
+    },
+    {
+      "course_id": "DSAI086",
+      "course_name": "Advanced AI Ethics",
+      "branch": "DSAI",
+      "year": 3,
+      "semester": 5,
+      "num_students": 89,
+      "faculty_id": "F017",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 0
+    },
+    {
+      "course_id": "DSAI087",
+      "course_name": "Modern Analytics",
+      "branch": "DSAI",
+      "year": 3,
+      "semester": 5,
+      "num_students": 86,
+      "faculty_id": "F002",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 0
+    },
+    {
+      "course_id": "DSAI088",
+      "course_name": "Advanced Data Mining",
+      "branch": "DSAI",
+      "year": 3,
+      "semester": 5,
+      "num_students": 97,
+      "faculty_id": "F009",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 1
+    },
+    {
+      "course_id": "DSAI089",
+      "course_name": "Capstone Natural Language Processing",
+      "branch": "DSAI",
+      "year": 4,
+      "semester": 7,
+      "num_students": 75,
+      "faculty_id": "F011",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 1
+    },
+    {
+      "course_id": "DSAI090",
+      "course_name": "Research in Statistics",
+      "branch": "DSAI",
+      "year": 4,
+      "semester": 7,
+      "num_students": 87,
+      "faculty_id": "F017",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 1
+    },
+    {
+      "course_id": "DSAI091",
+      "course_name": "Advanced Topics Data Mining",
+      "branch": "DSAI",
+      "year": 4,
+      "semester": 7,
+      "num_students": 81,
+      "faculty_id": "F018",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 1
+    },
+    {
+      "course_id": "DSAI092",
+      "course_name": "Capstone Natural Language Processing",
+      "branch": "DSAI",
+      "year": 4,
+      "semester": 7,
+      "num_students": 91,
+      "faculty_id": "F010",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 1
+    },
+    {
+      "course_id": "DSAI093",
+      "course_name": "Advanced Topics Data Science",
+      "branch": "DSAI",
+      "year": 4,
+      "semester": 7,
+      "num_students": 77,
+      "faculty_id": "F017",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 2
+    },
+    {
+      "course_id": "DSAI094",
+      "course_name": "Research in Deep Learning",
+      "branch": "DSAI",
+      "year": 4,
+      "semester": 7,
+      "num_students": 88,
+      "faculty_id": "F004",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 0
+    },
+    {
+      "course_id": "DSAI095",
+      "course_name": "Specialized Reinforcement Learning",
+      "branch": "DSAI",
+      "year": 4,
+      "semester": 7,
+      "num_students": 73,
+      "faculty_id": "F015",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 1
+    },
+    {
+      "course_id": "DSAI096",
+      "course_name": "Capstone Statistics",
+      "branch": "DSAI",
+      "year": 4,
+      "semester": 7,
+      "num_students": 72,
+      "faculty_id": "F017",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 2
+    }
+  ],
+  "rooms": [
+    {
+      "room_id": "CR101",
+      "capacity": 40,
+      "room_type": "classroom"
+    },
+    {
+      "room_id": "CR102",
+      "capacity": 80,
+      "room_type": "classroom"
+    },
+    {
+      "room_id": "CR103",
+      "capacity": 50,
+      "room_type": "classroom"
+    },
+    {
+      "room_id": "CR104",
+      "capacity": 120,
+      "room_type": "classroom"
+    },
+    {
+      "room_id": "CR105",
+      "capacity": 50,
+      "room_type": "classroom"
+    },
+    {
+      "room_id": "CR106",
+      "capacity": 40,
+      "room_type": "classroom"
+    },
+    {
+      "room_id": "CR107",
+      "capacity": 120,
+      "room_type": "classroom"
+    },
+    {
+      "room_id": "CR108",
+      "capacity": 50,
+      "room_type": "classroom"
+    },
+    {
+      "room_id": "CR109",
+      "capacity": 50,
+      "room_type": "classroom"
+    },
+    {
+      "room_id": "CR110",
+      "capacity": 40,
+      "room_type": "classroom"
+    },
+    {
+      "room_id": "CR111",
+      "capacity": 40,
+      "room_type": "classroom"
+    },
+    {
+      "room_id": "CR112",
+      "capacity": 80,
+      "room_type": "classroom"
+    },
+    {
+      "room_id": "CR113",
+      "capacity": 50,
+      "room_type": "classroom"
+    },
+    {
+      "room_id": "CR114",
+      "capacity": 120,
+      "room_type": "classroom"
+    },
+    {
+      "room_id": "CR115",
+      "capacity": 60,
+      "room_type": "classroom"
+    },
+    {
+      "room_id": "CR116",
+      "capacity": 100,
+      "room_type": "classroom"
+    },
+    {
+      "room_id": "CR117",
+      "capacity": 50,
+      "room_type": "classroom"
+    },
+    {
+      "room_id": "CR118",
+      "capacity": 80,
+      "room_type": "classroom"
+    },
+    {
+      "room_id": "CR119",
+      "capacity": 80,
+      "room_type": "classroom"
+    },
+    {
+      "room_id": "CR120",
+      "capacity": 120,
+      "room_type": "classroom"
+    },
+    {
+      "room_id": "LAB101",
+      "capacity": 40,
+      "room_type": "lab"
+    },
+    {
+      "room_id": "LAB102",
+      "capacity": 40,
+      "room_type": "lab"
+    },
+    {
+      "room_id": "LAB103",
+      "capacity": 45,
+      "room_type": "lab"
+    },
+    {
+      "room_id": "LAB104",
+      "capacity": 45,
+      "room_type": "lab"
+    },
+    {
+      "room_id": "LAB105",
+      "capacity": 45,
+      "room_type": "lab"
+    },
+    {
+      "room_id": "LAB106",
+      "capacity": 30,
+      "room_type": "lab"
+    },
+    {
+      "room_id": "LAB107",
+      "capacity": 35,
+      "room_type": "lab"
+    },
+    {
+      "room_id": "LAB108",
+      "capacity": 45,
+      "room_type": "lab"
+    },
+    {
+      "room_id": "LAB109",
+      "capacity": 30,
+      "room_type": "lab"
+    },
+    {
+      "room_id": "LAB110",
+      "capacity": 40,
+      "room_type": "lab"
+    },
+    {
+      "room_id": "LAB111",
+      "capacity": 40,
+      "room_type": "lab"
+    },
+    {
+      "room_id": "LAB112",
+      "capacity": 35,
+      "room_type": "lab"
+    },
+    {
+      "room_id": "HALL01",
+      "capacity": 200,
+      "room_type": "classroom"
+    },
+    {
+      "room_id": "HALL02",
+      "capacity": 250,
+      "room_type": "classroom"
+    }
+  ],
+  "faculties": [
+    {
+      "faculty_id": "F001",
+      "name": "Dr. Rajesh Kumar",
+      "max_hours_per_week": 20
+    },
+    {
+      "faculty_id": "F002",
+      "name": "Dr. Priya Sharma",
+      "max_hours_per_week": 18
+    },
+    {
+      "faculty_id": "F003",
+      "name": "Dr. Amit Patel",
+      "max_hours_per_week": 20
+    },
+    {
+      "faculty_id": "F004",
+      "name": "Dr. Sneha Reddy",
+      "max_hours_per_week": 20
+    },
+    {
+      "faculty_id": "F005",
+      "name": "Dr. Vikram Singh",
+      "max_hours_per_week": 18
+    },
+    {
+      "faculty_id": "F006",
+      "name": "Dr. Anita Desai",
+      "max_hours_per_week": 22
+    },
+    {
+      "faculty_id": "F007",
+      "name": "Dr. Karthik Rao",
+      "max_hours_per_week": 18
+    },
+    {
+      "faculty_id": "F008",
+      "name": "Dr. Meera Nair",
+      "max_hours_per_week": 20
+    },
+    {
+      "faculty_id": "F009",
+      "name": "Dr. Suresh Menon",
+      "max_hours_per_week": 18
+    },
+    {
+      "faculty_id": "F010",
+      "name": "Dr. Divya Krishnan",
+      "max_hours_per_week": 20
+    },
+    {
+      "faculty_id": "F011",
+      "name": "Dr. Rahul Verma",
+      "max_hours_per_week": 22
+    },
+    {
+      "faculty_id": "F012",
+      "name": "Dr. Lakshmi Iyer",
+      "max_hours_per_week": 20
+    },
+    {
+      "faculty_id": "F013",
+      "name": "Dr. Arun Kumar",
+      "max_hours_per_week": 18
+    },
+    {
+      "faculty_id": "F014",
+      "name": "Dr. Kavita Saxena",
+      "max_hours_per_week": 20
+    },
+    {
+      "faculty_id": "F015",
+      "name": "Dr. Prakash Joshi",
+      "max_hours_per_week": 18
+    },
+    {
+      "faculty_id": "F016",
+      "name": "Dr. Neha Agarwal",
+      "max_hours_per_week": 22
+    },
+    {
+      "faculty_id": "F017",
+      "name": "Dr. Sanjay Gupta",
+      "max_hours_per_week": 20
+    },
+    {
+      "faculty_id": "F018",
+      "name": "Dr. Pooja Shah",
+      "max_hours_per_week": 20
+    },
+    {
+      "faculty_id": "F019",
+      "name": "Dr. Ramesh Babu",
+      "max_hours_per_week": 20
+    },
+    {
+      "faculty_id": "F020",
+      "name": "Dr. Anjali Mehta",
+      "max_hours_per_week": 20
+    }
+  ]
+}
