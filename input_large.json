@@ -289,6 +289,66 @@
       "practicals": 1
     },
     {
+      "course_id": "CSE024B",
+      "course_name": "Topics in Parallel Computing",
+      "branch": "CSE",
+      "year": 3,
+      "semester": 5,
+      "num_students": 82,
+      "faculty_id": "F003",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 0
+    },
+    {
+      "course_id": "CSE024C",
+      "course_name": "Topics in Advanced Algorithm Design",
+      "branch": "CSE",
+      "year": 3,
+      "semester": 5,
+      "num_students": 79,
+      "faculty_id": "F007",
+      "lectures": 3,
+      "tutorials": 1,
+      "practicals": 0
+    },
+    {
+      "course_id": "CSE024D",
+      "course_name": "Specialized Full Stack Development",
+      "branch": "CSE",
+      "year": 3,
+      "semester": 5,
+      "num_students": 85,
+      "faculty_id": "F005",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 1
+    },
+    {
+      "course_id": "CSE024E",
+      "course_name": "Specialized Internet of Things",
+      "branch": "CSE",
+      "year": 3,
+      "semester": 5,
+      "num_students": 78,
+      "faculty_id": "F016",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 1
+    },
+    {
+      "course_id": "CSE024F",
+      "course_name": "Specialized UI and Experience Design",
+      "branch": "CSE",
+      "year": 3,
+      "semester": 5,
+      "num_students": 81,
+      "faculty_id": "F002",
+      "lectures": 3,
+      "tutorials": 0,
+      "practicals": 0
+    },
+    {
       "course_id": "CSE025",
       "course_name": "Research in Networks",
       "branch": "CSE",
