@@ -1,0 +1,20 @@
+{
+    "rooms": [
+        {
+            "room_id": "CR01",
+            "capacity": 100
+        }
+    ],
+    "courses": [
+        {
+            "course_code": "HEAVY1",
+            "course_name": "Too Much",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. HardWork",
+            "num_students": 60,
+            "ltpc": "10-0-0-3"
+        }
+    ]
+}

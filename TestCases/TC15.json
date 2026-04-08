@@ -1,0 +1,514 @@
+{
+    "rooms": [
+        {
+            "room_id": "CR0",
+            "capacity": 100
+        },
+        {
+            "room_id": "CR1",
+            "capacity": 100
+        }
+    ],
+    "courses": [
+        {
+            "course_code": "C0",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 0",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C1",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 1",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C2",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 2",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C3",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 3",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C4",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 4",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C5",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 5",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C6",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 6",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C7",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 7",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C8",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 8",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C9",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 9",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C10",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 10",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C11",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 11",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C12",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 12",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C13",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 13",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C14",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 14",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C15",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 15",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C16",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 16",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C17",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 17",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C18",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 18",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C19",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 19",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C20",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 20",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C21",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 21",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C22",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 22",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C23",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 23",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C24",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 24",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C25",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 25",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C26",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 26",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C27",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 27",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C28",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 28",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C29",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 29",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C30",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 30",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C31",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 31",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C32",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 32",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C33",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 33",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C34",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 34",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C35",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 35",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C36",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 36",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C37",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 37",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C38",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 38",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C39",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 39",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C40",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 40",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C41",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 41",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C42",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 42",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C43",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 43",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C44",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 44",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C45",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 45",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C46",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 46",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C47",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 47",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C48",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 48",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        },
+        {
+            "course_code": "C49",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. 49",
+            "num_students": 60,
+            "ltpc": "3-0-0-3"
+        }
+    ]
+}

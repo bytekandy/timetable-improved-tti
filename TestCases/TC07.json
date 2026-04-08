@@ -1,0 +1,34 @@
+{
+    "rooms": [
+        {
+            "room_id": "CR01",
+            "capacity": 100
+        },
+        {
+            "room_id": "CR02",
+            "capacity": 100
+        }
+    ],
+    "courses": [
+        {
+            "course_code": "C1",
+            "course_name": "A",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. Newton",
+            "num_students": 60,
+            "ltpc": "1-0-0-3"
+        },
+        {
+            "course_code": "C2",
+            "course_name": "B",
+            "semester": 3,
+            "branch": "ECE",
+            "is_elective": false,
+            "faculty_id": "  Dr. Newton ",
+            "num_students": 60,
+            "ltpc": "1-0-0-3"
+        }
+    ]
+}

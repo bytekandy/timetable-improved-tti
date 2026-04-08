@@ -1,0 +1,11 @@
+# Temporary Outputs
+timetable_output.json
+timetable_by_student.json
+timetable_standalone.html
+tt_out.json
+tt_student.json
+tt.html
+
+# Origianl Files
+timetable_scheduler_original.py
+input_original.json

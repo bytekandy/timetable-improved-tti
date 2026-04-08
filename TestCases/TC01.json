@@ -1,0 +1,34 @@
+{
+    "rooms": [
+        {
+            "room_id": "CR01",
+            "capacity": 100
+        },
+        {
+            "room_id": "CR02",
+            "capacity": 100
+        }
+    ],
+    "courses": [
+        {
+            "course_code": "C101",
+            "course_name": "Data Structures",
+            "semester": 3,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. X",
+            "num_students": 60,
+            "ltpc": "1-0-0-3"
+        },
+        {
+            "course_code": "C102",
+            "course_name": "Algorithms",
+            "semester": 3,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. Y",
+            "num_students": 60,
+            "ltpc": "1-0-0-3"
+        }
+    ]
+}

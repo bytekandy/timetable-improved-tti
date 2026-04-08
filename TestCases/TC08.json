@@ -1,0 +1,24 @@
+{
+    "rooms": [
+        {
+            "room_id": "CR01",
+            "capacity": 100
+        },
+        {
+            "room_id": "LAB01",
+            "capacity": 60
+        }
+    ],
+    "courses": [
+        {
+            "course_code": "P1",
+            "course_name": "Practical Course",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. A",
+            "num_students": 60,
+            "ltpc": "0-0-1-3"
+        }
+    ]
+}

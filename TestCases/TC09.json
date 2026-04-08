@@ -1,0 +1,34 @@
+{
+    "rooms": [
+        {
+            "room_id": "HALL01",
+            "capacity": 150
+        },
+        {
+            "room_id": "CR01",
+            "capacity": 40
+        }
+    ],
+    "courses": [
+        {
+            "course_code": "CORE",
+            "course_name": "Big Core",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. A",
+            "num_students": 120,
+            "ltpc": "1-0-0-3"
+        },
+        {
+            "course_code": "ELEC",
+            "course_name": "Small Elective",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": true,
+            "faculty_id": "Dr. B",
+            "num_students": 30,
+            "ltpc": "1-0-0-3"
+        }
+    ]
+}

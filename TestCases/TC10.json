@@ -1,0 +1,24 @@
+{
+    "rooms": [
+        {
+            "room_id": "CR01",
+            "capacity": 60
+        },
+        {
+            "room_id": "CR02",
+            "capacity": 50
+        }
+    ],
+    "courses": [
+        {
+            "course_code": "C1",
+            "course_name": "Big Class",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. Big",
+            "num_students": 120,
+            "ltpc": "1-0-0-3"
+        }
+    ]
+}

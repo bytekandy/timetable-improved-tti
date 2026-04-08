@@ -133,14 +133,19 @@ class ImprovedScheduler:
         self.schedule: List[ScheduledSession] = []
 
         # ---- tracking structures (keyed by normalised faculty name) ----
-        # FIX #1 & #6: store ALL booked slots per faculty (across all halves)
-        # so overlap checks work regardless of semester_half assignment.
+        # Faculty tracking – checked across all semesters (faculty can't be two places at once)
         self.faculty_slots:  Dict[str, List[TimeSlot]] = defaultdict(list)
-        # Rooms are physical – always check across all halves
+        # Rooms are physical – always checked globally
         self.room_slots:     Dict[str, List[TimeSlot]] = defaultdict(list)
-        # Student group → booked slots (within same semester_half)
+        # Student group (core courses only) → { half: [TimeSlot] }
+        # NOTE: Elective courses are EXCLUDED from student_slots because each
+        # elective has its own pre-registered cohort of students that is
+        # disjoint from every other elective's cohort.  Only core courses share
+        # a common student body and therefore need student-conflict checking.
         self.student_slots:  Dict[str, Dict[str, List[TimeSlot]]] = \
             defaultdict(lambda: defaultdict(list))
+
+        self.halves = ["1st half", "2nd half"]
 
         # Per-course, per-day session-type list (for daily-limit rule)
         self.course_daily:   Dict[str, Dict[str, List[SessionType]]] = \
@@ -160,46 +165,49 @@ class ImprovedScheduler:
                                     key=lambda r: -r.capacity)
         self.labs          = [r for r in rooms
                               if r.room_id.startswith('L') or 'LAB' in r.room_id.upper()]
+        # All non-lab rooms available for electives (first-fit)
+        self.all_rooms     = sorted([r for r in rooms
+                                     if r.room_id not in {x.room_id for x in self.labs}],
+                                    key=lambda r: r.capacity)
 
         # ---- conflict tracking ----
         self.conflicts:        List[str]     = []
         self.conflict_reasons: Counter       = Counter()
 
-        # ---- elective baskets ----
-        # FIX #2: baskets are detected first, then each basket is pre-assigned
-        # a shared time slot so all options in a basket run simultaneously.
+        # Basket labels kept for output/reporting only (no slot pinning needed)
         self.elective_baskets = self._detect_baskets()
-        self.basket_slots:    Dict[str, TimeSlot] = {}   # basket_id → pinned slot
 
         print("📚 Loaded:")
         print(f"  Courses       : {len(courses)}")
+        print(f"    Core        : {sum(1 for c in courses if not c.is_elective)}")
+        print(f"    Electives   : {sum(1 for c in courses if c.is_elective)}")
         print(f"  Big rooms     : {[f'{r.room_id}({r.capacity})' for r in self.big_rooms]}")
         print(f"  Regular rooms : {len(self.regular_rooms)}")
         print(f"  Labs          : {[r.room_id for r in self.labs]}")
-        print(f"  Elective baskets detected: {len(self.elective_baskets)}")
 
     # ------------------------------------------------------------------
     # Basket detection
     # ------------------------------------------------------------------
 
     def _detect_baskets(self) -> Dict[str, List[Course]]:
-        """Group electives into baskets by (semester, branch, semester_half)."""
+        """Group electives into baskets by (semester, branch) for output labelling.
+        No slot pinning is done – electives schedule freely because each elective
+        has a unique, pre-registered student cohort disjoint from all others."""
         baskets: Dict[str, List[Course]] = defaultdict(list)
         basket_counter = 1
         elective_groups: Dict[tuple, List[Course]] = defaultdict(list)
 
         for course in self.courses:
             if course.is_elective:
-                key = (course.semester, course.branch, course.semester_half)
+                key = (course.semester, course.branch)
                 elective_groups[key].append(course)
 
         for key, group in elective_groups.items():
-            if len(group) > 1:
-                basket_id = f"B{basket_counter}"
-                for course in group:
-                    course.basket = basket_id
-                    baskets[basket_id].append(course)
-                basket_counter += 1
+            basket_id = f"B{basket_counter}"
+            for course in group:
+                course.basket = basket_id
+                baskets[basket_id].append(course)
+            basket_counter += 1
 
         return dict(baskets)
 
@@ -208,41 +216,73 @@ class ImprovedScheduler:
     # ------------------------------------------------------------------
 
     def _generate_time_slots(self) -> List[TimeSlot]:
-        # FIX B07: Expanded time slots — added early morning, lunchtime, late
-        # evening, and Saturday to increase scheduling capacity from 20 → 45+
-        # slots per branch-day, significantly reducing "slot scarcity" conflicts.
+        # Time-slot blocks respecting campus schedule:
+        #   • All sessions start at 9:00 or later
+        #   • Lunch break  : 12:30 – 14:00 (no sessions overlap this window)
+        #   • Snacks break : 16:30 – 17:00 (minimum 30 min free)
+        #   • All sessions end by 18:30
+        #
+        # Three blocks:
+        #   Morning   09:00 – 12:30
+        #   Afternoon 14:00 – 16:30
+        #   Evening   17:00 – 18:30
+        #
+        # Overlapping candidates within each block are intentional — the
+        # overlap-aware constraint checker keeps them collision-free while
+        # giving the scheduler more placement flexibility.
         weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
         all_days  = weekdays + ["Saturday"]
         slots = []
         for day in all_days:
-            # --- 1.5h lecture slots ---
-            slots.append(TimeSlot(day, time(7, 30), time(9,   0), 1.5))  # early
-            slots.append(TimeSlot(day, time(9,  0), time(10, 30), 1.5))
-            slots.append(TimeSlot(day, time(11, 0), time(12, 30), 1.5))
-            slots.append(TimeSlot(day, time(13, 0), time(14, 30), 1.5))  # lunch
-            slots.append(TimeSlot(day, time(14, 0), time(15, 30), 1.5))
-            slots.append(TimeSlot(day, time(16, 0), time(17, 30), 1.5))
-            slots.append(TimeSlot(day, time(17, 30), time(19, 0), 1.5))  # evening
 
-            # --- 1h tutorial slots ---
-            slots.append(TimeSlot(day, time(7, 30), time(8,  30), 1.0))  # early
-            slots.append(TimeSlot(day, time(9,  0), time(10,  0), 1.0))
+            # ── MORNING BLOCK  (09:00 – 12:30) ──────────────────────────
+
+            # 1.5h lecture slots
+            slots.append(TimeSlot(day, time( 9,  0), time(10, 30), 1.5))
+            slots.append(TimeSlot(day, time(10,  0), time(11, 30), 1.5))
+            slots.append(TimeSlot(day, time(10, 30), time(12,  0), 1.5))
+            slots.append(TimeSlot(day, time(11,  0), time(12, 30), 1.5))
+
+            # 1h tutorial slots
+            slots.append(TimeSlot(day, time( 9,  0), time(10,  0), 1.0))
+            slots.append(TimeSlot(day, time(10,  0), time(11,  0), 1.0))
             slots.append(TimeSlot(day, time(10, 30), time(11, 30), 1.0))
+            slots.append(TimeSlot(day, time(11,  0), time(12,  0), 1.0))
             slots.append(TimeSlot(day, time(11, 30), time(12, 30), 1.0))
-            slots.append(TimeSlot(day, time(13, 0), time(14,  0), 1.0))  # lunch
-            slots.append(TimeSlot(day, time(14,  0), time(15,  0), 1.0))
-            slots.append(TimeSlot(day, time(15, 30), time(16, 30), 1.0))
-            slots.append(TimeSlot(day, time(16, 30), time(17, 30), 1.0))
-            slots.append(TimeSlot(day, time(18,  0), time(19,  0), 1.0))  # evening
 
-            # --- 2h practical slots ---
-            slots.append(TimeSlot(day, time(7, 30), time(9,  30), 2.0))  # early
-            slots.append(TimeSlot(day, time(9,  0), time(11,  0), 2.0))
-            slots.append(TimeSlot(day, time(11, 0), time(13,  0), 2.0))
-            slots.append(TimeSlot(day, time(13, 0), time(15,  0), 2.0))  # lunch
-            slots.append(TimeSlot(day, time(14, 0), time(16,  0), 2.0))
-            slots.append(TimeSlot(day, time(16, 0), time(18,  0), 2.0))
-            slots.append(TimeSlot(day, time(17, 0), time(19,  0), 2.0))  # evening
+            # 2h practical slots
+            slots.append(TimeSlot(day, time( 9,  0), time(11,  0), 2.0))
+            slots.append(TimeSlot(day, time( 9, 30), time(11, 30), 2.0))
+            slots.append(TimeSlot(day, time(10,  0), time(12,  0), 2.0))
+            slots.append(TimeSlot(day, time(10, 30), time(12, 30), 2.0))
+
+            # ── AFTERNOON BLOCK  (14:00 – 16:30) ────────────────────────
+
+            # 1.5h lecture slots
+            slots.append(TimeSlot(day, time(14,  0), time(15, 30), 1.5))
+            slots.append(TimeSlot(day, time(15,  0), time(16, 30), 1.5))
+
+            # 1h tutorial slots
+            slots.append(TimeSlot(day, time(14,  0), time(15,  0), 1.0))
+            slots.append(TimeSlot(day, time(14, 30), time(15, 30), 1.0))
+            slots.append(TimeSlot(day, time(15,  0), time(16,  0), 1.0))
+            slots.append(TimeSlot(day, time(15, 30), time(16, 30), 1.0))
+
+            # 2h practical slots
+            slots.append(TimeSlot(day, time(14,  0), time(16,  0), 2.0))
+            slots.append(TimeSlot(day, time(14, 30), time(16, 30), 2.0))
+
+            # ── EVENING BLOCK  (17:00 – 18:30) ──────────────────────────
+
+            # 1.5h lecture slot
+            slots.append(TimeSlot(day, time(17,  0), time(18, 30), 1.5))
+
+            # 1h tutorial slots
+            slots.append(TimeSlot(day, time(17,  0), time(18,  0), 1.0))
+            slots.append(TimeSlot(day, time(17, 30), time(18, 30), 1.0))
+
+            # (No 2h practicals — only 1.5h available in this block)
+
         return slots
 
     # ------------------------------------------------------------------
@@ -254,9 +294,25 @@ class ImprovedScheduler:
         if session_type == SessionType.PRACTICAL:
             return [r for r in self.labs if r.capacity >= course.num_students]
         if course.is_elective:
-            return [r for r in self.regular_rooms if r.capacity >= course.num_students]
+            # Electives: pick the SMALLEST room that fits (they have small cohorts);
+            # use any non-lab room sorted by ascending capacity for efficient packing.
+            return [r for r in self.all_rooms if r.capacity >= course.num_students]
         return [r for r in self.big_rooms + self.regular_rooms
                 if r.capacity >= course.num_students]
+
+    # ------------------------------------------------------------------
+    # Helper for Semester Halves
+    # ------------------------------------------------------------------
+
+    def _get_active_halves(self, sem_half: str) -> List[str]:
+        sem_lower = sem_half.lower()
+        if "full" in sem_lower:
+            return self.halves
+        if "1" in sem_lower or "first" in sem_lower or "sem-i" in sem_lower:
+            return ["1st half"]
+        if "2" in sem_lower or "second" in sem_lower or "sem-ii" in sem_lower:
+            return ["2nd half"]
+        return self.halves
 
     # ------------------------------------------------------------------
     # Constraint checking  (FIX #1, #3, #6)
@@ -265,47 +321,61 @@ class ImprovedScheduler:
     def _check_constraints(self, course: Course, session_type: SessionType,
                            time_slot: TimeSlot, room: Room) -> Tuple[bool, str]:
 
-        # FIX #6 + FIX #1: check faculty across ALL semester-halves using overlap
-        if _slot_overlaps_any(time_slot, self.faculty_slots[course.faculty_name]):
-            self.conflict_reasons["Faculty busy"] += 1
-            return False, "Faculty busy"
+        # Faculty conflict: nobody can be in two places at once.
+        # EXCEPTION: a faculty teaching the same course to multiple branches
+        # concurrently (different rooms, same slot) is allowed — the scheduler
+        # tracks them as separate courses, but physically it is the same lecture.
+        # We detect this by matching on the same course_title OR same course_code.
+        for booked_slot in self.faculty_slots[course.faculty_name]:
+            if time_slot.overlaps(booked_slot):
+                already_shared = any(
+                    s.time_slot == booked_slot and (
+                        s.course.course_code  == course.course_code or
+                        s.course.course_title == course.course_title
+                    )
+                    for s in self.schedule
+                    if s.faculty_name == course.faculty_name
+                )
+                if already_shared:
+                    continue   # cross-branch shared slot – OK
+                self.conflict_reasons["Faculty busy"] += 1
+                return False, "Faculty busy"
 
-        # FIX #1: room conflict via overlap (not equality)
+        # Room conflict: physical rooms are shared by everyone
         if _slot_overlaps_any(time_slot, self.room_slots[room.room_id]):
             self.conflict_reasons["Room occupied"] += 1
             return False, "Room occupied"
 
-        # FIX #1: student conflict via overlap (within same semester_half)
+        # Student conflict check applies to BOTH core and elective sessions.
+        #
+        # Key insight:
+        #   - student_slots contains ONLY core course bookings (electives are never
+        #     added to it, so elective–elective conflicts are never raised).
+        #   - A student who takes an elective ALSO attends ALL their core courses, so
+        #     an elective must not be placed in a slot already occupied by a core
+        #     course for that branch/semester.
+        #   - Two electives CAN share the same slot (different pre-registered cohorts).
         student_key   = course.get_student_key()
-        semester_half = course.semester_half
-        if _slot_overlaps_any(time_slot,
-                              self.student_slots[student_key][semester_half]):
-            self.conflict_reasons["Students busy"] += 1
-            return False, "Students busy"
+        active_halves = self._get_active_halves(course.semester_half)
+        for h in active_halves:
+            if _slot_overlaps_any(time_slot, self.student_slots[student_key][h]):
+                self.conflict_reasons["Students busy (elective-core clash)" if course.is_elective else "Students busy"] += 1
+                return False, "Students busy"
 
-        # Daily limit: max 2 sessions per course per day, no same-type repeats,
-        # no lecture+tutorial on same day.
+        # Daily limit per course: at most 3 distinct sessions per day
+        # (allows L=3 courses to spread over Mon/Wed/Fri without bumping into
+        # the old cap of 2 that forced unnecessary conflicts)
         day            = time_slot.day
         daily_sessions = self.course_daily[course.course_id][day]
 
-        if len(daily_sessions) >= 2:
-            self.conflict_reasons["Max 2 sessions/day exceeded"] += 1
-            return False, "Course already has 2 sessions today"
+        if len(daily_sessions) >= 3:
+            self.conflict_reasons["Max 3 sessions/day exceeded"] += 1
+            return False, "Course already has 3 sessions today"
 
-        if len(daily_sessions) == 1:
-            et = daily_sessions[0]
-
-            if session_type == et:
-                # Same type twice on same day is never allowed
-                self.conflict_reasons[f"Two {session_type.value}s same day"] += 1
-                return False, f"Already has a {session_type.value} today"
-
-            # FIX #3 (kept): same-type pairs still blocked
-            # FIX B07: Relaxed – only disallow Lecture+Lecture or Tutorial+Tutorial.
-            # Lecture+Tutorial and Lecture+Practical combos on the same day are
-            # allowed as long as the time slots don't overlap (the overlap check
-            # above already catches actual time conflicts).
-            # Tutorial+Practical on same day is also allowed.
+        if session_type in daily_sessions:
+            # Same session-type twice on the same day is never useful
+            self.conflict_reasons[f"{session_type.value} already today"] += 1
+            return False, f"Already has a {session_type.value} today"
 
         # Duration sanity check
         required = {SessionType.LECTURE: 1.5,
@@ -336,7 +406,10 @@ class ImprovedScheduler:
         self.schedule.append(session)
         self.faculty_slots[course.faculty_name].append(time_slot)
         self.room_slots[room.room_id].append(time_slot)
-        self.student_slots[course.get_student_key()][course.semester_half].append(time_slot)
+        # Only core courses participate in student-slot tracking
+        if not course.is_elective:
+            for h in self._get_active_halves(course.semester_half):
+                self.student_slots[course.get_student_key()][h].append(time_slot)
         self.course_daily[course.course_id][time_slot.day].append(session_type)
 
     def _schedule_session(self, course: Course, session_type: SessionType,
@@ -352,11 +425,16 @@ class ImprovedScheduler:
         required      = {SessionType.LECTURE: 1.5,
                          SessionType.TUTORIAL: 1.0,
                          SessionType.PRACTICAL: 2.0}
-        candidate_slots = ([forced_slot] if forced_slot is not None
-                           else self.slots_by_duration[required[session_type]])
+        candidate_slots = self.slots_by_duration[required[session_type]]
+
+        # Shuffle room order for electives to reduce clustering on the same room
+        import random
+        rooms_ordered = list(suitable_rooms)
+        if course.is_elective:
+            random.shuffle(rooms_ordered)
 
         for time_slot in candidate_slots:
-            for room in suitable_rooms:
+            for room in rooms_ordered:
                 valid, _ = self._check_constraints(course, session_type,
                                                    time_slot, room)
                 if valid:
@@ -365,73 +443,8 @@ class ImprovedScheduler:
                     return True
         return False
 
-    # ------------------------------------------------------------------
-    # FIX #2: Basket slot pre-assignment
-    # ------------------------------------------------------------------
-
-    def _assign_basket_slots(self) -> None:
-        """
-        For every elective basket, find ONE lecture slot that is free for ALL
-        courses in the basket and pin it.  This ensures students can choose
-        between options because all basket courses run at the same time.
-        """
-        lecture_slots = self.slots_by_duration[1.5]
-
-        for basket_id, basket_courses in self.elective_baskets.items():
-            for candidate in lecture_slots:
-                ok = True
-                for course in basket_courses:
-                    # Check faculty and student availability for this candidate
-                    if _slot_overlaps_any(candidate,
-                                          self.faculty_slots[course.faculty_name]):
-                        ok = False; break
-                    student_key = course.get_student_key()
-                    semester_half = course.semester_half
-                    if _slot_overlaps_any(candidate,
-                                          self.student_slots[student_key][semester_half]):
-                        ok = False; break
-                if ok:
-                    self.basket_slots[basket_id] = candidate
-                    print(f"  Basket {basket_id} pinned to {candidate}")
-                    break
-            else:
-                print(f"  ⚠️  Basket {basket_id}: no shared slot found – "
-                      "courses will be scheduled independently")
-
-    def _schedule_basket_course(self, course: Course) -> int:
-        """Schedule a basket elective course, pinning lectures to the basket slot."""
-        scheduled = 0
-        basket_slot = self.basket_slots.get(course.basket)
-
-        sessions_needed = [
-            (SessionType.LECTURE,   course.lectures),
-            (SessionType.TUTORIAL,  course.tutorials),
-            (SessionType.PRACTICAL, course.practicals),
-        ]
-
-        for session_type, count in sessions_needed:
-            for session_num in range(1, count + 1):
-                # Lectures use the shared basket slot; other types are free
-                forced = (basket_slot
-                          if session_type == SessionType.LECTURE and basket_slot
-                          else None)
-                if self._schedule_session(course, session_type,
-                                          session_num, forced_slot=forced):
-                    scheduled += 1
-                else:
-                    self.conflicts.append(
-                        f"{course.course_code} ({course.branch} "
-                        f"{course.section or ''} {course.semester_half}) - "
-                        f"{session_type.value} #{session_num} "
-                        f"[basket {course.basket}] - Faculty: {course.faculty_name}"
-                    )
-        return scheduled
-
     def schedule_course(self, course: Course) -> int:
-        """Schedule all sessions for a course."""
-        if course.basket:
-            return self._schedule_basket_course(course)
-
+        """Schedule all sessions for a course (lectures → tutorials → practicals)."""
         sessions_needed = [
             (SessionType.LECTURE,   course.lectures),
             (SessionType.TUTORIAL,  course.tutorials),
@@ -443,11 +456,12 @@ class ImprovedScheduler:
                 if self._schedule_session(course, session_type, session_num):
                     scheduled += 1
                 else:
+                    basket_tag = f" [basket {course.basket}]" if course.basket else ""
                     self.conflicts.append(
                         f"{course.course_code} ({course.branch} "
                         f"{course.section or ''} {course.semester_half}) - "
-                        f"{session_type.value} #{session_num} "
-                        f"- Faculty: {course.faculty_name}"
+                        f"{session_type.value} #{session_num}"
+                        f"{basket_tag} - Faculty: {course.faculty_name}"
                     )
         return scheduled
 
@@ -460,28 +474,30 @@ class ImprovedScheduler:
         print("GENERATING TIMETABLE")
         print("="*60)
 
-        # Sort: non-electives first (practicals first, larger groups first),
-        # then electives; within each half, sort by semester.
+        # Core courses first (they share a student body → tighter constraints).
+        # Within core: practicals first (most constrained by needing labs),
+        # then by semester, then larger groups.
+        # Electives come last and schedule freely (unique per-course cohorts,
+        # no student-conflict checks between them).
         sorted_courses = sorted(
             self.courses,
             key=lambda c: (
+                1 if c.is_elective else 0,  # core first
                 c.semester_half,
                 c.semester,
-                1 if c.is_elective else 0,   # non-electives first
                 -c.practicals,
                 -c.num_students,
             )
         )
 
-        # Pre-assign basket slots BEFORE scheduling any elective
-        print("\nAssigning elective basket slots…")
-        self._assign_basket_slots()
-
         total_sessions = 0
         for course in sorted_courses:
             total_sessions += self.schedule_course(course)
 
-        print(f"\n✓ Scheduled {total_sessions} sessions")
+        core_scheduled = sum(1 for s in self.schedule if not s.course.is_elective)
+        elec_scheduled = sum(1 for s in self.schedule if s.course.is_elective)
+        print(f"\n✓ Scheduled {total_sessions} sessions "
+              f"(core: {core_scheduled}, elective: {elec_scheduled})")
         print(f"⚠️  {len(self.conflicts)} unscheduled sessions")
 
         print("\n📊 Conflict Breakdown:")
@@ -593,21 +609,44 @@ def load_data(filepath: str):
         course_counter += 1
 
         if is_new_schema:
-            course_code = str(c.get("course_id", "")).strip()
+            course_code = str(c.get("course_code", c.get("course_id", ""))).strip()
             course_title = c.get("course_name", "")
             semester = int(c.get("semester", 1))
             branch = c.get("branch", "")
-            section = None
-            lectures = int(c.get("lectures", 0))
-            tutorials = int(c.get("tutorials", 0))
-            practicals = int(c.get("practicals", 0))
-            # FIX B04: resolve faculty ID → real name using lookup table
-            faculty_id = c.get("faculty_id", "Unknown")
-            raw_faculty = faculty_lookup.get(faculty_id, faculty_id)
-            # FIX B05: use prefix heuristic instead of keyword-in-title
-            is_elective = any(course_title.startswith(pfx) for pfx in ELECTIVE_PREFIXES)
+            section = c.get("section")
             num_students = int(c.get("num_students", 60))
-            semester_half = "Sem-I" if semester % 2 != 0 else "Sem-II"
+
+            ltpc = c.get("ltpc", "")
+            if ltpc and "-" in ltpc:
+                parts = ltpc.split("-")
+                lectures = int(parts[0]) if len(parts) > 0 else 0
+                tutorials = int(parts[1]) if len(parts) > 1 else 0
+                practicals = int(parts[2]) if len(parts) > 2 else 0
+                credits = int(parts[3]) if len(parts) > 3 else 0
+            else:
+                lectures = int(c.get("lectures", 0))
+                tutorials = int(c.get("tutorials", 0))
+                practicals = int(c.get("practicals", 0))
+                credits = int(c.get("credits", 0))
+
+            faculty_id = c.get("faculty_id", "")
+            raw_faculty = faculty_lookup.get(faculty_id, faculty_id) if faculty_id else ""
+            # BUG FIX: empty faculty names all collapse to "", making every
+            # anonymous elective block every other anonymous elective.
+            # Assign a unique synthetic key so they don't interfere.
+            if not raw_faculty.strip():
+                raw_faculty = f"_anon_{course_counter}"
+
+            # Elective detection relies exclusively on JSON flag (no heuristic needed)
+            is_elective = bool(c.get("is_elective", False))
+
+            # Semester-half derived from credits
+            if credits in (3, 4):
+                semester_half = "Full"
+            elif credits == 2:
+                semester_half = "1st half"
+            else:
+                semester_half = "Full"  # safety fallback
         else:
             course_code = c["Course Code"].strip()
             course_title = c["Course Title"]

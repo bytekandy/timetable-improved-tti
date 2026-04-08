@@ -1,0 +1,20 @@
+{
+    "rooms": [
+        {
+            "room_id": "CR01",
+            "capacity": 100
+        }
+    ],
+    "courses": [
+        {
+            "course_code": "DUP1",
+            "course_name": "No Dups",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. Unique",
+            "num_students": 60,
+            "ltpc": "2-0-0-3"
+        }
+    ]
+}

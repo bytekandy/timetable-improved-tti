@@ -1,0 +1,35 @@
+{
+    "rooms": [
+        {
+            "room_id": "CR01",
+            "capacity": 100
+        },
+        {
+            "room_id": "CR02",
+            "capacity": 100
+        }
+    ],
+    "courses": [
+        {
+            "course_code": "H1",
+            "course_name": "1st Half",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. A",
+            "num_students": 60,
+            "ltpc": "1-0-0-2"
+        },
+        {
+            "course_code": "H2",
+            "course_name": "2nd Half",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. B",
+            "num_students": 60,
+            "semester_half": "2nd half",
+            "ltpc": "1-0-0-2"
+        }
+    ]
+}

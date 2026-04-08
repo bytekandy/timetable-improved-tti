@@ -1,0 +1,24 @@
+{
+    "rooms": [
+        {
+            "room_id": "CR01",
+            "capacity": 100
+        },
+        {
+            "room_id": "LAB01",
+            "capacity": 100
+        }
+    ],
+    "courses": [
+        {
+            "course_code": "PRAC1",
+            "course_name": "2 Hour Practical",
+            "semester": 1,
+            "branch": "CSE",
+            "is_elective": false,
+            "faculty_id": "Dr. Lab",
+            "num_students": 60,
+            "ltpc": "0-0-1-3"
+        }
+    ]
+}
