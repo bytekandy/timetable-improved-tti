@@ -5,52 +5,31 @@ tti.py — IIIT Dharwad Timetable Scheduler
 Reads a structured JSON input (produced by generate_input.py) and generates
 a weekly timetable for all courses.
 
-## Bug Fix Contributors & IDs
+Bug Fixes (from original timetable_scheduler_original.py):
+  B01 - Single-Schema Crash: auto-detects old/new JSON schemas.
+  B02 - Electives Block Each Other: only core sessions write to student_slots.
+  B03 - Cross-Branch Teaching Rejected: exception for same course in different rooms.
+  B04 - Semester Half Cross-Check Missing: "Full" courses now block both halves.
+  B05 - Rigid Basket Slot Pinning: baskets are labels only, no forced pinning.
+  B06 - Empty Faculty Mutual Blocking: unique _unassigned_ IDs per course.
+  B07 - Faculty Name Normalisation Flawed: protects short names like "Dr. U".
+  B08 - Hardcoded Linux Output Path: writes to current directory instead.
+  B09 - Faculty ID Shown Instead of Name: resolves IDs via faculties lookup table.
+  B10 - Elective Flag Not Read from New Schema: reads is_elective boolean.
+  B11 - semester_half Ignored in New Schema: reads field before credit inference.
+  B12 - Windows Emoji Encoding Crash: UTF-8 stdout wrapper.
 
-### Anurag S. (AS##)
-  * AS01 / Schema Compatibility: `load_data()` dynamically accepts both Old
-         (Uppercase keys) and New (Lowercase keys) JSON schemas, avoiding `KeyError`.
-  * AS02 / Windows Emoji Crash: Forced `sys.stdout` UTF-8 wrapper to prevent
-         `UnicodeEncodeError` on Windows consoles.
-  * AS03 / Hardcoded Paths: Output directories changed from Linux-specific
-         absolute paths to current working directory (`.`).
-
-### Kanhaiya M. (KM##)
-  * KM01 / Faculty ID Resolution: The parser now resolves `faculty_id` (e.g., `F012`)
-         to readable names using the `faculties` lookup array.
-  * KM02 / Fragile Elective Detection: Transitioned from brittle title-matching
-         logic to relying on explicit `is_elective` flags / standardized heuristics.
-  * KM03 / README Commands: Documented cross-platform CLI alternatives for Windows users.
-  * KM04 / Low Scheduling Rate: Expanded time pools (including early/late slots and
-         Saturday options) and relaxed over-strict constraints.
-
-### Anand K. (AK##)
-  * AK01 / Overlap Detection: `overlaps()` uses proper time boundary math instead of
-         strict dictionary `in` equality to prevent partial overlaps.
-  * AK02 / Elective Isolation: Electives check for clashes against core classes, but
-         bypass logging themselves into `student_slots` to avoid blocking other
-         independently attended electives.
-  * AK03 / Elective Basket Slot Pinning: Removed forced rigid slot pinning. Baskets
-         are still computed, but electives schedule freely into gaps.
-  * AK04 / Faculty Normalisation: Collapsed extra whitespaces and trailing initials
-         so identical profs aren't double-booked.
-  * AK05 / Empty Faculty Handling: Assigns synthetic string IDs (`_unassigned_`)
-         instead of blank strings so unassigned courses don't block each other.
-  * AK06 / Cross-Semester Halves: Time slots are properly checked and locked across
-         ALL active semester halves (Full/1st/2nd half logic).
-  * AK07 / Cross-branch Shared Courses: Exception logic allows exact same course
-         title/code to be placed concurrently in different rooms without triggering
-         faculty busy error.
-  * AK08 / Placement Priority & Shuffling: Core courses placed first. Electives try
-         smallest-fit rooms first.
-  * AK09 / Daily Limit Extension: Raised to 3 distinct session occurrences safely
-         per class daily.
-
-### Test Case Discoveries
-  * TC03 / Faculty Name Over-Strip: Fixed regex that aggressively stripped single-letter
-         names (e.g., "Dr. U" → "Dr.") causing false faculty collisions.
-  * TC14 / Semester Half Ignored: Fixed `load_data()` to read `semester_half` from
-         JSON instead of hardcoding based on credits alone.
+Enhancements:
+  E01 - Saturday + Evening Slots: ~100 → ~138 weekly time slots.
+  E02 - Daily Limit Raised: 2 → 3 sessions per course per day.
+  E03 - Same-Day Session Bans Removed: only same-type repeats blocked.
+  E04 - Scheduling Priority Sort: core first, practical-heavy first.
+  E05 - Elective Room Shuffling: random room order to spread usage.
+  E06 - Smallest-Fit Room Selection: ascending capacity for electives.
+  E07 - LTPC String Format: supports "3-1-0-4" compact notation.
+  E08 - Code Refactoring: cleaner class/method/field names.
+  E09 - Output File Renaming: tt_out.json, tt_student.json, tt.html.
+  E10 - Test Suite: 15 structured test cases (TC01–TC15).
 
 Usage:
   python tti.py [input.json]
@@ -91,8 +70,6 @@ class TimeSlot:
     def overlaps(self, other: "TimeSlot") -> bool:
         """
         True when two slots share any time on the same day.
-        # AK01: Proper boundary overlap logic replaced naive equality checks (`in`)
-        # which incorrectly allowed partially overlapping practicals and lectures.
         """
         if self.day != other.day:
             return False
@@ -171,7 +148,7 @@ def _normalise_faculty(raw: str) -> str:
     """
     Collapse extra whitespace and strip trailing single-letter abbreviations
     so that "Dr. Shirshendu L" and "Dr. Shirshendu Layek" resolve to the same key.
-    # AK04: Faculty name normalisation prevents the same person from being
+    # BUG FIX B07: Faculty name normalisation prevents the same person from being
     # double-booked just because their name was spelt slightly differently.
     """
     name = " ".join(raw.strip().split())
@@ -179,7 +156,7 @@ def _normalise_faculty(raw: str) -> str:
     if len(parts) > 1 and re.match(r'^[A-Z]\.?$', parts[-1]):
         leftover = parts[:-1]
         titles = {"dr.", "dr", "prof.", "prof", "mr.", "mr", "ms.", "ms"}
-        # TC03: Do not strip if it leaves ONLY a title (e.g. "Dr. U" -> "Dr.")
+        # BUG FIX B07: Do not strip if it leaves ONLY a title (e.g. "Dr. U" -> "Dr.")
         if not (len(leftover) == 1 and leftover[0].lower() in titles):
             name = " ".join(leftover)
     return name
@@ -275,7 +252,7 @@ class Scheduler:
         Assign a basket label to every elective course.
         Courses in the same (semester, branch) group share a basket label so the
         output viewer can display which courses a student is choosing between.
-        # AK03: Rigid slot pinning removed. Electives compete freely for open slots
+        # BUG FIX B05: Rigid slot pinning removed. Electives compete freely for open slots
         # instead of being forcefully bundled into the exact same time slot, increasing placement rate.
         """
         groups: Dict[tuple, List[Course]] = defaultdict(list)
@@ -437,7 +414,7 @@ class Scheduler:
         # 1. Faculty check
         for booked_slot in self.faculty_slots[course.faculty]:
             if slot.overlaps(booked_slot):
-                # AK07: Cross-branch shared teaching exception.
+                # BUG FIX B03: Cross-branch shared teaching exception.
                 # Allow cross-branch shared lectures: same course taught to multiple
                 # branches simultaneously in different rooms by the same faculty.
                 is_shared = any(
@@ -457,11 +434,11 @@ class Scheduler:
             return False, "Room occupied"
 
         # 3. Student group check
-        # AK02: Elective isolation.
+        # BUG FIX B02: Elective isolation.
         # Both core and elective sessions check this dict, but only core sessions
         # write to it — so electives can overlap each other but not core sessions.
         group_key = course.student_group_key()
-        # AK06: Cross-semester half detection. Checks all active half variants.
+        # BUG FIX B04: Cross-semester half detection. Checks all active half variants.
         for half_key in self._active_halves(course.half):
             if _overlaps_any(slot, self.student_slots[group_key][half_key]):
                 reason = ("Students busy (elective vs core clash)"
@@ -471,7 +448,7 @@ class Scheduler:
 
         # 4. Daily limit
         today = self.sessions_today[course.id][slot.day]
-        # AK09: Daily limit bumped to 3, giving courses more breathing room.
+        # ENHANCEMENT E02: Daily limit bumped to 3, giving courses more breathing room.
         if len(today) >= 3:
             self.conflict_tally["Max 3 sessions/day"] += 1
             return False, "Max 3 sessions/day"
@@ -589,7 +566,7 @@ class Scheduler:
         print("GENERATING TIMETABLE")
         print("=" * 60)
 
-        # AK08: Prioritised scheduling order.
+        # ENHANCEMENT E04: Prioritised scheduling order.
         # Core courses (practicals first within each semester – labs are scarce)
         # go before Electives (which can fill remaining free slots and share slots with each other).
         ordered = sorted(
@@ -708,7 +685,7 @@ def load_data(filepath: str) -> tuple[List[Course], List[Room]]:
     with open(filepath, encoding="utf-8") as f:
         data = json.load(f)
 
-    # KM01: Faculty ID Not Resolved to Name
+    # BUG FIX B09: Faculty ID Not Resolved to Name
     # We now fetch the 'faculties' dictionary mapping string IDs (like 'F012') to actual names.
     faculty_lookup: Dict[str, str] = {
         fac["faculty_id"]: fac.get("name", fac["faculty_id"])
@@ -718,7 +695,7 @@ def load_data(filepath: str) -> tuple[List[Course], List[Room]]:
 
     courses: List[Course] = []
     
-    # AS01: JSON Schema Incompatibility (`KeyError: 'Courses'`)
+    # BUG FIX B01: JSON Schema Incompatibility (`KeyError: 'Courses'`)
     # Automatically detects if the file uses older capitalized keys or new lowercase schema.
     is_new_schema = "courses" in data
     course_list = data["courses"] if is_new_schema else data.get("Courses", [])
@@ -732,7 +709,7 @@ def load_data(filepath: str) -> tuple[List[Course], List[Room]]:
             section      = entry.get("section")
             num_students = int(entry.get("num_students", 60))
             
-            # KM02: Robust Elective Detection
+            # BUG FIX B10: Robust Elective Detection
             # Deprecated fragile "Elective in course_title" checks in favour of proper explicit boolean flags.
             is_elective  = bool(entry.get("is_elective", False))
             
@@ -748,7 +725,7 @@ def load_data(filepath: str) -> tuple[List[Course], List[Room]]:
             raw_faculty_id = entry.get("faculty_id", "")
             raw_faculty    = faculty_lookup.get(raw_faculty_id, raw_faculty_id)
             
-            # TC14: Read semester_half from JSON instead of hardcoding based on credits.
+            # BUG FIX B11: Read semester_half from JSON instead of hardcoding based on credits.
             half = entry.get("semester_half", entry.get("half"))
             if not half:
                 if credits in (3, 4):
@@ -772,7 +749,7 @@ def load_data(filepath: str) -> tuple[List[Course], List[Room]]:
 
             if "Semester Half" not in entry or entry["Semester Half"] in (None, ""):
                 half = "Sem-II"
-                # AK06: Missing semester_half field now correctly triggers a fallback warning.
+                # BUG FIX B04: Missing semester_half field now correctly triggers a fallback warning.
                 try:
                     print(f"  ⚠️  Course {code} has no 'Semester Half' – defaulting to '{half}'")
                 except UnicodeEncodeError:
@@ -780,7 +757,7 @@ def load_data(filepath: str) -> tuple[List[Course], List[Room]]:
             else:
                 half = entry["Semester Half"]
 
-        # AK05: Empty faculty bug fix.
+        # BUG FIX B06: Empty faculty bug fix.
         # Courses with no assigned faculty get a unique synthetic key so they
         # don't all block each other's slots by having the same blank faculty identity.
         if not raw_faculty.strip():
@@ -1140,7 +1117,7 @@ def _write_html(timetable: dict, student_data: dict, output_path: str) -> None:
 # ---------------------------------------------------------------------------
 
 def main():
-    # AS02: Windows Unicode Emoji Crash (`UnicodeEncodeError`)
+    # BUG FIX B12: Windows Unicode Emoji Crash (`UnicodeEncodeError`)
     # Ensure emoji output works natively on all terminals, primarily Windows cmd/PowerShell.
     if sys.stdout.encoding.lower() != "utf-8":
         sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
@@ -1153,14 +1130,13 @@ def main():
     print(f"📂 Loading: {input_file}")
     courses, rooms = load_data(input_file)
 
-    # KM04: Low Scheduling Success Rate
-    # The Scheduler now utilises expanded time slot pools (including Early/Late/Sat)
-    # and has intentionally relaxed hardcoded constraints allowing higher efficiency rates.
+    # ENHANCEMENT E01: Expanded time slot pools (including Early/Late/Sat)
+    # and intentionally relaxed hardcoded constraints for higher efficiency rates.
     scheduler  = Scheduler(courses, rooms)
     timetable  = scheduler.run()
     by_student = scheduler.by_student_group()
 
-    # AS03: Hardcoded Linux Output Pathing
+    # BUG FIX B08: Hardcoded Linux Output Pathing
     # Prevented files silently writing to fixed system paths like `/mnt/user-data/`.
     output_dir = "."
     os.makedirs(output_dir, exist_ok=True)
